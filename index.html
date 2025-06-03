@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Technikmeeting</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="baseStyle.css" rel="stylesheet">
+    
+</head>
+<body>
+    <section class="hero">
+        <h1>Technik Meeting</h1>
+        <p>Wie gut kennt ihr euch mit Farben aus?</p>
+    </section>
+    
+    <div class="container">
+        <section class="controls">
+            <h2>Controls</h2>
+            <div>
+                <p>Lightness</p>
+                <input type="range" step="0.01" value="0.6" min="0" max="1" id="lightness"> 
+            </div>
+            <div>
+                <p>Chroma</p>
+                <input type="range" step="0.01" value="0" min="0" max="0.5" id="chroma"> 
+            </div> 
+            <div>
+                <p>Hue</p>
+                <input type="range" value="0" min="0" max="360" id="hue"> 
+            </div> 
+        </section>
+        <section>
+            <h2 class="section-title">CSS Funktionen</h2>
+            <p class="section-desc">Wir reden heute ein wenig über folgende Dinge:</p>
+            <ul class="palette-grid">
+                <li>
+                    color-gamut()
+                    <ul>
+                        <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/color-gamut">Docs</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/?search=color-gamut">Caniuse</a></li>
+                    </ul>
+                </li>
+                <li>
+                    color-mix() 
+                    <ul>
+                        <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix">Docs</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/?search=color-mix()">Caniuse</a></li>
+                    </ul>
+                </li>
+                <li>
+                    relative-color
+                    <ul>
+                        <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors">Docs</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/?search=relative%20color">Caniuse</a></li>
+                    </ul>
+                </li>
+                <li>
+                    oklch()
+                    <ul>
+                        <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch">Docs</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/?search=oklch">Caniuse</a></li>
+                    </ul>
+                </li>
+                <li>
+                    light-dark()
+                    <ul>
+                        <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark">Docs</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/?search=light-dark()">Caniuse</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <h2 class="section-title">Farbpalette</h2>
+            <p>Diese Farbpalette wird berechnet basierend auf einer Primär Farbe</p>
+            <div class="palette-grid">
+                <div class="color-card" style="background: var(--color-bg);">
+                    <div class="color-name">Background</div>
+                </div>
+                <div class="color-card" style="background: var(--color-surface);">
+                    <div class="color-name">Surface</div>
+                </div>
+                <div class="color-card" style="background: var(--color-primary-text);">
+                    <div class="color-name">Primary Text</div>
+                </div>
+                <div class="color-card" style="background: var(--color-secondary-text);">
+                    <div class="color-name">Secondary Text</div>
+                </div>
+                <div class="color-card" style="background: var(--color-disabled-text);">
+                    <div class="color-name">Disabled Text</div>
+                </div>
+                <div class="color-card" style="background: var(--color-on-accent-text);">
+                    <div class="color-name">On Accent Text</div>
+                </div>
+                <div class="color-card" style="background: var(--color-primary-accent);">
+                    <div class="color-name">Primary Accent</div>
+                </div>
+                <div class="color-card" style="background: var(--color-secondary-accent);">
+                    <div class="color-name">Secondary Accent</div>
+                </div>
+                <div class="color-card" style="background: var(--color-tertiary-accent);">
+                    <div class="color-name">Tertiary Accent</div>
+                </div>
+                <div class="color-card" style="background: var(--color-dividers);">
+                    <div class="color-name">Dividers</div>
+                </div>
+                <div class="color-card" style="background: var(--color-input-background);">
+                    <div class="color-name">Input Background</div>
+                </div>
+                <div class="color-card" style="background: var(--color-success);">
+                    <div class="color-name">Success</div>
+                </div>
+                <div class="color-card" style="background: var(--color-warning);">
+                    <div class="color-name">Warning</div>
+                </div>
+                <div class="color-card" style="background: var(--color-error);">
+                    <div class="color-name">Error</div>
+                </div>
+            </div>
+        </section>
+
+    <script>
+        function rgbToHex(rgb) {
+            const result = rgb.match(/\d+/g);
+            if (!result) return rgb;
+            let [r, g, b] = result;
+            r = parseInt(r).toString(16).padStart(2, '0');
+            g = parseInt(g).toString(16).padStart(2, '0');
+            b = parseInt(b).toString(16).padStart(2, '0');
+            return `#${r}${g}${b}`.toUpperCase();
+        }
+
+        function getContrastTextColor(element) {
+            const bgColor = window.getComputedStyle(element).backgroundColor;
+            const rgb = bgColor.match(/\d+/g).map(Number);
+            let [r, g, b] = rgb;
+
+            [r, g, b] = [r, g, b].map(c => {
+                c /= 255;
+                return c <= 0.03928
+                    ? c / 12.92
+                    : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+
+            const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+            return luminance > 0.179 ? '#000000' : '#FFFFFF';
+        }
+
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex);
+            alert('Copied ' + hex + ' to clipboard!');
+        }
+
+        function calculateFontColor() {
+            document.querySelectorAll('.color-card').forEach(card => {
+                card.querySelectorAll('p.hex-value').forEach(p => p.remove());
+
+                const bg = getComputedStyle(card).backgroundColor;
+                const hex = rgbToHex(bg);
+
+                card.style.color = getContrastTextColor(card);
+
+                const p = document.createElement('p');
+                p.textContent = hex;
+                p.className = 'hex-value';
+                p.style.fontSize = '0.95em';
+                p.style.margin = '8px 0 0 0';
+                p.style.cursor = 'pointer';
+                p.title = 'Click to copy';
+                p.onclick = () => copyColor(hex);
+                card.appendChild(p);
+                card.onclick = () => copyColor(hex);
+            })
+        }
+        
+        calculateFontColor()
+        lightness.oninput = e => {
+            document.firstElementChild.style.setProperty('--lightness', e.target.value)
+            calculateFontColor()
+        }
+        chroma.oninput = e => {
+            document.firstElementChild.style.setProperty('--chroma', e.target.value)
+            calculateFontColor()
+        }
+        hue.oninput = e => {
+            document.firstElementChild.style.setProperty('--hue', e.target.value)
+            calculateFontColor()
+        }
+        </script>
+</body>
+</html>

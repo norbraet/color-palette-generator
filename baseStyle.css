@@ -1,0 +1,82 @@
+/* @media (color-gamut: srgb) {
+    .hero {
+        background: color(srgb 0 0.8 0);
+    }
+
+    body {
+        background: color(display-p3 0.6 0 1);
+    }
+}
+
+@media (color-gamut: p3) {
+    body {
+        background: color(display-p3 0 0.8 0.5);
+    }
+} */
+
+:root {
+    color-scheme: light dark;
+
+    --hue: 0;
+    --lightness: 0.6;
+    --chroma: 0.1;
+
+    --color-primary-accent: oklch(var(--lightness) var(--chroma) var(--hue));;
+    --color-secondary-accent: oklch(from var(--color-primary-accent) l c calc(h + 180));
+    --color-tertiary-accent: oklch(from var(--color-primary-accent) l c calc(h + 90));;
+
+    --color-bg: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), white 92%),
+        color-mix(in oklch, var(--color-primary-accent), black 70%)
+    );
+    --color-surface: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), lightgrey 85%),
+        color-mix(in oklch, var(--color-primary-accent), grey 70%)
+    );
+    --color-primary-text: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), black 70%),
+        color-mix(in oklch, var(--color-primary-accent), white 97%)
+    );
+    --color-secondary-text: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), black 85%),
+        color-mix(in oklch, var(--color-primary-accent), white 92%)
+    );
+    --color-disabled-text: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), grey 85%),
+        color-mix(in oklch, var(--color-primary-accent), lightgrey 80%)
+    );
+    --color-on-accent-text: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), black 50%),
+        color-mix(in oklch, var(--color-primary-accent), white 50%)
+    );
+
+    --color-success: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), green 80%),
+        color-mix(in oklch, var(--color-primary-accent), green 80%)
+    );
+    --color-warning: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), orange 80%),
+        color-mix(in oklch, var(--color-primary-accent), orange 80%)
+    );
+    --color-error: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), red 80%),
+        color-mix(in oklch, var(--color-primary-accent), red 80%)
+    );
+    
+    --color-input-background: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), darkgrey 80%),
+        color-mix(in oklch, var(--color-primary-accent), darkgrey 80%)
+    );
+
+    --color-dividers: light-dark(
+        color-mix(in oklch, var(--color-primary-accent), lightgrey 80%),
+        color-mix(in oklch, var(--color-primary-accent), lightgrey 80%)
+    );
+
+    --radius: 12px;
+    --shadow: 0 0.25rem 2rem rgba(0,0,0,0.08);
+
+    --max-content-width: 1440px;
+    --gutter: 2rem;
+}
+
